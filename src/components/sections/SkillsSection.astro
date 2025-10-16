@@ -1,0 +1,21 @@
+---
+import SectionHeading from "../layouts/SectionHeading.astro";
+import Section from "../layouts/Section.astro";
+import Spacer from "../Spacer.astro";
+import WhiteCard from "../layouts/WhiteCard.astro";
+
+import { frontmatter, Content as TechStack } from "../../docs/tech_stack.md";
+import Prose from "../layouts/Prose.astro";
+---
+
+<Section cssColor="#F8EAD0">
+	<SectionHeading text={frontmatter.title} />
+	<WhiteCard>
+		<Prose>
+			<TechStack />
+		</Prose>
+	</WhiteCard>
+	</div>
+	<Spacer />
+</Section>
+

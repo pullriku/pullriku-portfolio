@@ -1,0 +1,17 @@
+---
+import { type WaveDividerProps } from "./WaveDriverInner";
+import WaveDividerInner from "./WaveDriverInner";
+
+type Props = WaveDividerProps;
+
+const props = Astro.props as Props;
+const sandColor = props.sandColor;
+---
+
+<div>
+    <div class="relative -mt-50 z-20">
+        <WaveDividerInner client:load {...props} />
+    </div>
+    <div style={`background-color: ${sandColor ?? '#FFFFFF'};`}>
+    </div>
+</div>

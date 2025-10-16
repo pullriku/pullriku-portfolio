@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef } from "react";
-import { LIGHT_SAND } from "../lib/const";
 
 const SVG_W = 1440;
 const SVG_H = 120;
@@ -7,25 +6,25 @@ const WAVE_PROPS = {
 	amplitude: 36,
 	cycles: 2,
 	foam: true,
-	speed: 0.25,
+	speed: 0.6,
 } as const;
 
-type WaveDividerProps = {
+export type WaveDividerProps = {
 	width?: number;
 	height?: number;
 	amplitude?: number; // px
 	cycles?: number; // waves across width
-	sandColor?: string;
+	sandColor: string;
 	foam?: boolean;
 	speed?: number; // radians per second
 };
 
-export function WaveDivider({
+export default function WaveDividerInner({
 	width = SVG_W,
 	height = SVG_H,
 	amplitude = WAVE_PROPS.amplitude,
 	cycles = WAVE_PROPS.cycles,
-	sandColor = LIGHT_SAND,
+	sandColor,
 	foam = WAVE_PROPS.foam,
 	speed = WAVE_PROPS.speed,
 }: WaveDividerProps) {
@@ -75,7 +74,6 @@ export function WaveDivider({
 		raf = requestAnimationFrame(tick);
 		return () => cancelAnimationFrame(raf);
 	}, [width, height, amp, cycles, speed]);
-
 	return (
 		<div className="relative mt-32">
 			<svg

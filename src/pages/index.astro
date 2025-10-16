@@ -1,60 +1,20 @@
 ---
+import AcademicBgSection from "../components/sections/AcademicBgSection.astro";
+import Hero from "../components/sections/Hero.astro";
 import Layout from "../components/layouts/Layout.astro";
-
-import BlurCard from "../components/BlurCard.astro";
-import Prose from "../components/layouts/Prose.astro";
-
-import { getCollection } from "astro:content";
-import { render } from "astro:content";
-import { WaveDivider } from "../components/WaveDriver";
-import SandSection from "../components/SandSection.astro";
-import Hero from "../components/Hero.astro";
-
-const worksRaw = await getCollection("works");
-const sortedWorksRaw = worksRaw.sort(
-	(a, b) =>
-		(a.data.order ?? Number.MAX_VALUE) - (b.data.order ?? Number.MAX_VALUE),
-);
-const worksContents = await Promise.all(
-	sortedWorksRaw.map(async (work) => await render(work)),
-);
-
-const worksImages = import.meta.glob(
-	"/src/assets/works/*.{png,jpg,jpeg,svg,gif}",
-);
-const works = await Promise.all(
-	worksRaw.map(async (work, i) => ({
-		raw: work,
-		Content: worksContents[i].Content,
-		image: work.data.image
-			? (worksImages[work.data.image] as () => Promise<ImageMetadata>)
-			: undefined,
-	})),
-);
+import SkillsSection from "../components/sections/SkillsSection.astro";
+import WaveDivider from "../components/sections/WaveDriver.astro";
+import WorksSection from "../components/sections/WorksSection.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <Layout>
-	
-
-
 	<Hero />
-	<WaveDivider client:load />
-	<SandSection />
-	
-	<section class=" flex flex-col gap-5">
-		<div class="text-4xl font-bold text-white drop-shadow-sm text-center">
-			Works
-		</div>
-		{
-			works.map(({raw, Content, image}) => (
-				
-				// @ts-ignore
-				<BlurCard title={raw.data.title} image={image ? image() : undefined}> 
-					<Prose>
-						<Content />
-					</Prose>
-				</BlurCard>
-			))
-		}
-	</section>
+	<WaveDivider sandColor="#FDF3E3"/>
+	<WorksSection />
+	<WaveDivider sandColor="#F8EAD0" />
+	<SkillsSection />
+	<WaveDivider sandColor="#F1DFBC" />
+	<AcademicBgSection />
+	<Footer />
 </Layout>

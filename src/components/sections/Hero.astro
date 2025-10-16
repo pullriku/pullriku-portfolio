@@ -1,0 +1,28 @@
+---
+import pullrikuImage from "../../assets/pullriku.jpeg";
+import { Content as About } from "../../docs/about.md";
+import BlackCard from "../layouts/BlackCard.astro";
+import CircleIcon from "../CircleIcon.astro";
+import ProseBgBlack from "../layouts/ProseBgBlack.astro";
+import { getImage } from "astro:assets";
+import bgImage from "../../assets/background.png";
+import Spacer from "../Spacer.astro";
+
+const optImage = await getImage({ src: bgImage });
+---
+
+<div class="bg-cover bg-center"
+	style={`background-image: url(${optImage.src});`}
+>
+	<div class="min-h-[70vh] p-8 flex md:flex-row flex-col w-full gap-8  mx-auto items-center justify-center">
+		<div class="w-60 sm:w-80">
+			<CircleIcon image={pullrikuImage}/>
+		</div>
+		<BlackCard title="辰巳 力久" subtitle='Riku Tatsumi'>
+			<ProseBgBlack>
+				<About />
+			</Prose>
+		</BlackCard>
+	</div>
+	<Spacer />
+</div>

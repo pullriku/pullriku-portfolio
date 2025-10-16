@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import WhiteCard from "../layouts/WhiteCard.astro";
+import { render } from "astro:content";
+import Prose from "../layouts/Prose.astro";
+import SectionHeading from "../layouts/SectionHeading.astro";
+import Section from "../layouts/Section.astro";
+import Spacer from "../Spacer.astro";
+
+const worksRaw = await getCollection("works");
+const sortedWorksRaw = worksRaw.sort(
+	(a, b) =>
+		(a.data.order ?? Number.MAX_VALUE) - (b.data.order ?? Number.MAX_VALUE),
+);
+const worksContents = await Promise.all(
+	sortedWorksRaw.map(async (work) => await render(work)),
+);
+
+const works = await Promise.all(
+	worksRaw.map(async (work, i) => ({
+		raw: work,
+		Content: worksContents[i].Content,
+	})),
+);
+---
+
+<Section cssColor="#FDF3E3">
+	<SectionHeading text="⚒️ Works" />
+	<div class="flex flex-col gap-4">
+		{
+			works.map(async ({raw, Content}) => (
+				<WhiteCard title={raw.data.title} image={raw.data.image ? {path: raw.data.image, alt: raw.data.alt!} : undefined}>
+					<Prose>
+						<Content />
+					</Prose>
+				</WhiteCard>
+			))
+		}
+	</div>
+	<Spacer />
+</Section>

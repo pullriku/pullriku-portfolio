@@ -1,0 +1,16 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = {
+	cssColor?: string;
+	class?: HTMLAttributes<"section">["class"];
+};
+
+const { cssColor, class: className } = Astro.props as Props;
+---
+
+<section style={`background-color: ${cssColor ?? 'transparent'};`} class={className}>
+	<div class="mx-auto max-w-5xl px-6 pt-8 pb-16"> 
+		<slot />
+	</div>
+</section>
