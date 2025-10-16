@@ -1,0 +1,11 @@
+---
+import { Image } from "astro:assets";
+
+type Props = {
+	image: ImageMetadata;
+};
+
+const { image } = Astro.props;
+---
+
+<Image src={image} alt="pullriku" class="rounded-full"/>

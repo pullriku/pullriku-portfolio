@@ -1,0 +1,22 @@
+---
+import "../../styles/global.css";
+import { getImage } from "astro:assets";
+import bgImage from "../../assets/background.png";
+
+const optImage = await getImage({ src: bgImage });
+---
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<title> Riku's Portfolio</title>
+	</head>
+	<body
+		class={`min-h-screen bg-fixed bg-center bg-cover`}
+		style={`background-image: url(${optImage.src});`}
+	>
+		<slot />
+	</body>
+</html>

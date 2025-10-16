@@ -1,0 +1,19 @@
+---
+import pullrikuImage from "../assets/pullriku.jpeg";
+import { Content as About } from "../docs/about.md";
+import BlackCard from "./BlackCard.astro";
+import CircleIcon from "./CircleIcon.astro";
+import Prose from "./layouts/Prose.astro";
+---
+
+<div class="md:flex md:gap-8  mx-auto items-center justify-center"
+>
+    <div class="w-80">
+        <CircleIcon image={pullrikuImage}/>
+    </div>
+    <BlackCard title="辰巳 力久" subtitle='Riku Tatsumi'>
+        <Prose>
+            <About />
+        </Prose>
+    </BlackCard>
+</div>
