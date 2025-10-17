@@ -1,0 +1,8 @@
+{
+    "name": "pullriku-portfolio",
+    "compatibility_date": "2025-10-17",
+    "assets": {
+        "directory": "./dist/",
+        "not_found_handling": "404-page"
+    }
+}
